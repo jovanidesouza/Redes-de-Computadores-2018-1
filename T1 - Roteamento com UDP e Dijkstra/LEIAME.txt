@@ -1,0 +1,9 @@
+﻿Trabalho de Jovani de Souza & Davi Pegaoraro
+
+Para compilar   gcc roteador.c -o roteador -lpthread
+para executar ./roteador ID
+
+onde ID é um interio de 0 a 5
+
+
+	
