@@ -31,4 +31,5 @@ typedef struct{//estrutura que cria uma mensagem enviada/recebida por um roteado
 }mensagem;
 
 void die(char *s);//imprime erros
-void criar_roteador(int ID);//cria roteador 
+void criar_roteador(int ID);//cria roteador
+void * recebe(void * nada);

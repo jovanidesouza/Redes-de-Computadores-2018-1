@@ -6,8 +6,10 @@
 
 #include "roteador.h"
 int ID, sock;
+mensagem temp_msg;
 roteador roteadores[NROTEADORES];//vetor de roteadores, usa paenas o ID, mas instancia um vetor para facilitar a leitura do arquivo
 struct sockaddr_in si_me, si_other;
+pthread_t recebe_id;
 
 
 
@@ -31,6 +33,7 @@ int main(int argc, char const *argv[]) {
   si_other.sin_addr.s_addr = htonl(INADDR_ANY); //Atribui o ip
 
   criar_roteador(ID);//carrega insformações do arquivo,(id, porta ,ip) cria socket e faz bind do socket com a porta
+  pthread_create(&recebe_id, NULL, recebe, NULL); //Cria a thread receptora
   sleep(5);
 
 
@@ -70,4 +73,19 @@ void criar_roteador(int ID){//insrancia roteador, cria socket e faz bind com a p
 void die(char *s){//função pra imprimir erros na tela
 	perror(s);
 	//exit(1);
+}
+
+void * recebe(void * nada){//recebe mensagens e retransmite se necessário
+
+	int slen=sizeof(si_other);//si_me
+	int next,i;
+
+	while(1){
+		if((recvfrom(sock, &temp_msg, sizeof(temp_msg), 0, (struct sockaddr*) &si_me, &slen)) == -1){
+			printf("Erro ao receber mensagem\n");
+		}
+
+	}
+
+
 }
